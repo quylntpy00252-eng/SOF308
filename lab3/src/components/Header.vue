@@ -91,7 +91,7 @@ const langItems = [
 </template>
 
 <style scoped>
-/* Tùy chỉnh nhỏ để các link trông đẹp hơn */
+
 .nav-link {
     font-weight: 500;
     padding: 0.5rem 1rem;
@@ -99,6 +99,6 @@ const langItems = [
 }
 
 .navbar-nav .nav-link:hover {
-    color: #5cb85c; /* Màu xanh lá cây nổi bật khi hover */
+    color: #5cb85c; 
 }
 </style>

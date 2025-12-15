@@ -18,7 +18,7 @@
             </div>
             <div class="mb-3">
                 <label for="regPhone" class="form-label">Số Điện Thoại</label>
-                 <input type="tel" class="form-control" id="regPhone" placeholder="Ví dụ: 023" required>
+                 <input type="number" class="form-control" id="regPhone" placeholder=" 023" required>
            </div>
             
             <div class="mb-3">

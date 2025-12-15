@@ -9,6 +9,11 @@
         </div>
 
         <div class="mb-3">
+          <label class="form-label">Phân loại (Category)</label>
+          <input v-model="category" type="text" class="form-control" placeholder="Ví dụ: Công nghệ, Du lịch, Ẩm thực" required />
+        </div>
+
+        <div class="mb-3">
           <label class="form-label">Nội dung</label>
           <textarea v-model="content" class="form-control" rows="5" required></textarea>
         </div>
@@ -36,25 +41,27 @@ import { usePostStore } from '../store/posts'
 import { useUserStore } from '../store/user'
 import { useRouter, useRoute } from 'vue-router'
 
-const title = ref('')
-const content = ref('')
-const imageUrl = ref('')
-const editMode = ref(false)
-
 const postStore = usePostStore()
 const userStore = useUserStore()
 const router = useRouter()
 const route = useRoute()
 
-// Load posts từ localStorage khi mở
+// State
+const title = ref('')
+const content = ref('')
+const imageUrl = ref('')
+const category = ref('') // ✅ State Category Mới
+const editMode = ref(false)
+
+// Load posts từ localStorage
 postStore.loadPosts()
 
 if (!userStore.currentUser) {
   alert('Vui lòng đăng nhập trước!')
-  router.push('/login')
+  router.push('/auth')
 }
 
-// Edit mode
+// Edit mode logic
 const editId = route.query.editId ? Number(route.query.editId) : null
 onMounted(() => {
   if (editId) {
@@ -68,6 +75,7 @@ onMounted(() => {
       title.value = post.title
       content.value = post.content
       imageUrl.value = post.imageUrl || ''
+      category.value = post.category || '' // ✅ Load Category
       editMode.value = true
     }
   }
@@ -76,28 +84,34 @@ onMounted(() => {
 const submitPost = () => {
   if (!userStore.currentUser) return
 
+  const user = userStore.currentUser
+  const postCategory = category.value.trim() || 'Chung' // Mặc định là 'Chung' nếu trống
+
   if (editMode.value && editId) {
+    // CHỈNH SỬA
     postStore.editPost(editId, {
       title: title.value,
       content: content.value,
-      imageUrl: imageUrl.value
+      imageUrl: imageUrl.value,
+      category: postCategory, // ✅ Cập nhật Category
     })
     alert('Cập nhật bài viết thành công!')
   } else {
+    // TẠO MỚI
     const newPost = {
       id: Date.now(),
       title: title.value,
       content: content.value,
-      author: userStore.currentUser!.name,
-      authorId: userStore.currentUser!.id,
-      imageUrl: imageUrl.value,
+      author: user.name,
+      authorId: user.id,
       createdAt: new Date().toLocaleString(),
-      comments: []
+      imageUrl: imageUrl.value,
+      comments: [],
+      category: postCategory, // ✅ Thêm Category
     }
     postStore.addPost(newPost)
-    alert('Đăng bài thành công!')
+    alert('Đăng bài viết mới thành công!')
   }
-
   router.push('/')
 }
 </script>

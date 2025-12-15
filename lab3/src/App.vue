@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// ... (các import giữ nguyên)
 import Header from './components/Header.vue'; 
 import AboutMeCard from './components/AboutMeCard.vue';
 import CategoryList from './components/CategoryList.vue';

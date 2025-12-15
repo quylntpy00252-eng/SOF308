@@ -39,14 +39,14 @@ const profile = {
 </template>
 
 <style scoped>
-/* Custom style cho tiêu đề trong Sidebar */
+
 .about-title {
     color: #00a79a !important; /* Màu xanh tương thích với Header */
     font-weight: 600;
     margin-bottom: 0.75rem;
 }
 
-/* Đảm bảo hình ảnh card được căn chỉnh tốt hơn */
+
 .card-body {
     padding-top: 0.5rem !important;
 }

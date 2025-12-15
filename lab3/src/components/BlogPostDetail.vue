@@ -8,7 +8,7 @@ const post = {
     date: '24/11/2025'
 };
 
-// Dữ liệu giả cho các bước tập (dùng cho Collapse/Accordion)
+
 const steps = [
     { title: 'Tư thế Chuẩn bị (4 điểm)', content: 'Bắt đầu với tư thế 4 điểm. Vai và cổ tay của bạn phải thẳng hàng và vuông góc với thảm, lưng của bạn phải bằng phẳng và xương chậu của bạn phải cân đối.' },
     { title: 'Bước 1: Hít vào', content: 'Hít vào, vòng lưng, nâng cằm lên, mở rộng ngực.' },
